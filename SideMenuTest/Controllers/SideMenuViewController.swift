@@ -61,8 +61,11 @@ extension SideMenuViewController: UITableViewDelegate, UITableViewDataSource {
   func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
     
     let cell = tableView.dequeueReusableCell(withIdentifier: cellID, for: indexPath)
-    cell.contentView.backgroundColor = sideMenuColor
-    cell.selectionStyle = .blue
+    cell.backgroundColor = sideMenuColor
+    let cellBGView = UIView()
+    
+    cellBGView.backgroundColor = .systemBlue
+    cell.selectedBackgroundView = cellBGView
     cell.textLabel?.textColor = .white
     cell.textLabel?.text = menuItems[indexPath.row].name
 
@@ -71,7 +74,8 @@ extension SideMenuViewController: UITableViewDelegate, UITableViewDataSource {
   }
   
   func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
-          
+  
+    tableView.deselectRow(at: indexPath, animated: true)
     self.delegate?.selectCell(row: indexPath.row)
           
   }
